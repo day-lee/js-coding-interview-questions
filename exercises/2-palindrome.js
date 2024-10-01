@@ -23,7 +23,8 @@ so we don't need to compare all of them */
 }
 
 function palindrome_arr(str) {
-  // convert
+  // convert the string to an array to use the reverse function,
+  // then convert it back to string to compare with original string
   const arr = str.split("").reverse().join("");
   //console.log(arr);
   if (str === arr) {
