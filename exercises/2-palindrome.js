@@ -22,8 +22,20 @@ so we don't need to compare all of them */
   return true;
 }
 
-function palindrome2(str) {}
+function palindrome_arr(str) {
+  // convert
+  const arr = str.split("").reverse().join("");
+  //console.log(arr);
+  if (str === arr) {
+    return true;
+  }
+  return false;
+}
 
 console.log(palindrome("kayak"));
 console.log(palindrome("kayaks"));
 console.log(palindrome("racecar"));
+
+console.log(palindrome_arr("kayak"));
+console.log(palindrome_arr("kayaks"));
+console.log(palindrome_arr("racecar"));
