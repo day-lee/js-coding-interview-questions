@@ -9,14 +9,15 @@
 
 // option 1
 function capitalize(str) {
-  // turn the string into an array to use the for loop
+  // split the string into an array of words
   const words = str.split(" ");
   let result = [];
-  // push the transformed word into an array
+  // capitalise the first letter of each word and add the rest of the word
+  // push the transformed word into the result array
   for (let word of words) {
     result.push(word[0].toUpperCase() + word.slice(1));
   }
-  // turn it into a string
+  // join the array back into a string
   return result.join(" ");
 }
 
@@ -30,6 +31,7 @@ console.log(
 function capitalize2(str) {
   const words = str.split(" ");
   return words.map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
+  q;
 }
 
 console.log(capitalize2("this is mukhtar from coding money"));
