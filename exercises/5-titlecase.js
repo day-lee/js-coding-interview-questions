@@ -11,6 +11,7 @@
 function capitalize(str) {
   // split the string into an array of words
   const words = str.split(" ");
+  console.log(words);
   let result = [];
   // capitalise the first letter of each word and add the rest of the word
   // push the transformed word into the result array
@@ -30,6 +31,7 @@ console.log(
 // option 2. map()
 function capitalize2(str) {
   const words = str.split(" ");
+  console.log(words);
   return words.map((word) => word[0].toUpperCase() + word.slice(1)).join(" ");
   q;
 }
