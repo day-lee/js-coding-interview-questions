@@ -9,7 +9,8 @@
 
 // option 1
 function capitalize(str) {
-  // split the string into an array of words
+  // split/divide the string into an array of words
+  // space is a delimiter, string will be split at every space
   const words = str.split(" ");
   console.log(words);
   let result = [];
