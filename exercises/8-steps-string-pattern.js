@@ -16,7 +16,6 @@
 //       '##  '
 //       '### '
 //       '####'
-
 // similar to chessboard
 function steps(n) {
   let pountSymbol = "#";
