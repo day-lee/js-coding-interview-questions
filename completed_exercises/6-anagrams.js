@@ -1,5 +1,5 @@
 // --- Directions
-// Check to see if two provided strings are anagrams of eachother.
+// Check to see if two provided strings are anagrams of each other.
 // One string is an anagram of another if it uses the same characters
 // in the same quantity. Only consider characters, not spaces
 // or punctuation.  Consider capital letters to be the same as lower case
@@ -8,42 +8,139 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
-function cleanStr(str){
-  return str.toLowerCase().replace(/[\W]/g,'').split('').sort().join('')
+// option 1. one frequency counter - best
+function anagramOneCounter(stringA, stringB) {
+  function sanitiser(str) {
+    return str.toLowerCase().replace(/[^a-z]/g, "");
+  }
+
+  const sanitisedStringA = sanitiser(stringA);
+  const sanitisedStringB = sanitiser(stringB);
+
+  const count = {};
+
+  for (let letter of sanitisedStringA) {
+    count[letter] = (count[letter] ?? 0) + 1;
+  }
+
+  for (let letter of sanitisedStringB) {
+    // case1. letter doesn't exist in stringA: "count[letter] = undefined is falsy" so (!false === true) and return false, not anagram
+    // case2. letter count doesn't match: "count[letter] = 0", 0 is falsy, (!false === true) and return falase, not anagram
+    if (!count[letter]) {
+      return false;
+    }
+    // check the case 2
+    count[letter]--;
+  }
+
+  return true;
 }
-function anagrams(stringA, stringB) {
- 
-  return cleanStr(stringA) === cleanStr(stringB)
 
+console.log(anagramOneCounter("coding money", "money coding"));
+console.log(anagramOneCounter("RAIL! SAFETY!", "fairy tales"));
+console.log(anagramOneCounter("Hi there", "Bye there"));
+
+// option2. compare the Map count ---------------------------------------------
+function anagramsMap(stringA, stringB) {
+  function sanitiser(str) {
+    return str
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z]/g, "");
+  }
+
+  const sanitisedStringA = sanitiser(stringA);
+  const sanitisedStringB = sanitiser(stringB);
+
+  if (sanitisedStringA.length !== sanitisedStringB.length) return false;
+
+  const mapA = new Map();
+  const mapB = new Map();
+
+  for (let letter of sanitisedStringA) {
+    mapA.set(letter, (mapA.get(letter) || 0) + 1);
+  }
+  for (let letter of sanitisedStringB) {
+    mapB.set(letter, (mapB.get(letter) || 0) + 1);
+  }
+
+  for (let letter of sanitisedStringA) {
+    if (mapA.get(letter) !== mapB.get(letter)) {
+      return false;
+    }
+    return true;
+  }
 }
 
+console.assert(
+  anagramsMap("RAIL! SAFETY!", "fairy tales") === true,
+  "map test1 fail"
+);
+console.assert(
+  anagramsMap("coding money", "money coding") === true,
+  "map test2 fail"
+);
+console.assert(
+  anagramsMap("Hi there", "Bye there") === false,
+  "map test3 fail"
+);
+console.assert(
+  anagramsMap("1 suNny d@y", "D@y 1SUNNY") === true,
+  "map test4 fail"
+);
+console.log("test anagramMap done");
 
-console.log(anagrams('RAIL! SAFETY!', 'fairy tales'));
+// option 3. compare the object count  ---------------------------------------------
+function anagramsObj(stringA, stringB) {
+  // create a function that cleans the string to contain only alphabets
+  function sanitiser(str) {
+    return str
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z]/g, "");
+  }
 
+  const sanitisedStringA = sanitiser(stringA);
+  const sanitisedStringB = sanitiser(stringB);
 
-// function charMap(str){
-//   const charmap = {}
-//   str = str.toLowerCase().replace(/[\W]/g,'')
-//   for(let char of str){
-//     charmap[char] = ++charmap[char] || 1
-//   }
-//   return charmap
-// }
+  // Edge case: if the lengths are not equal after sanitising, they can't be anagrams
+  if (sanitisedStringA.length !== sanitisedStringB.length) return false;
 
-// function anagrams(stringA, stringB) {
-//   //Step 1: Build Char Map for stringA
-//   const charmapA = charMap(stringA)
-  
-//   //Step 2: Build Char Map for stringB
-//   const charmapB = charMap(stringB)
+  let countA = {};
+  let countB = {};
 
-//   //Step 3: Compare each character in the both the Char Maps
-//   if(Object.keys(charmapA).length !== Object.keys(charmapB).length) return false
+  // count the occurences of the letter
+  for (let letter of sanitisedStringA) {
+    countA[letter] = (countA[letter] ?? 0) + 1;
+  }
 
-//   for(let key in charmapA){
-//     if(charmapA[key]!== charmapB[key]) return false
-//   }
+  for (let letter of sanitisedStringB) {
+    countB[letter] = (countB[letter] ?? 0) + 1;
+  }
 
-//   return true
+  // compare the each letter in the count object
+  for (letter in countA) {
+    if (countA[letter] !== countB[letter]) {
+      return false;
+    }
+    return true;
+  }
+}
 
-// }
+console.assert(
+  anagramsObj("RAIL! SAFETY!", "fairy tales") === true,
+  "obj test1 fail"
+);
+console.assert(
+  anagramsObj("coding money", "money coding") === true,
+  "obj test2 fail"
+);
+console.assert(
+  anagramsObj("Hi there", "Bye there") === false,
+  "obj test3 fail"
+);
+console.assert(
+  anagramsObj("1 suNny d@y", "D@y 1SUNNY") === true,
+  "obj test4 fail"
+);
+console.log("test anagramObj done");
