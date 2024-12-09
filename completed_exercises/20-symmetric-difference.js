@@ -5,7 +5,7 @@ In other words, return the symmetric difference of the two arrays.
 
 // option1. filter with logical OR operators
 function symmetricDiff(arr1, arr2) {
-  let concatArr = arr1.concat(arr2);
+  let concatArr = arr1.concat(arr2); //  const newArr = [...arr1, ...arr2] -> spread to copy
 
   return concatArr.filter(
     (item) => !arr1.includes(item) || !arr2.includes(item)
