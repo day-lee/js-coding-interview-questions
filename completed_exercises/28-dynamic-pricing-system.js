@@ -20,21 +20,21 @@ const productsList = [
 function dynamicPricingSystem(productsList) {
   let currentTime = new Date().getHours();
 
-  const newPriceProductsList = productsList.map((item) => {
-    let newPrice = item.price;
+  const updatedPriceProductsList = productsList.map((item) => {
+    let updatedPrice = item.price;
     // when the item is on promotion, 50% discount applies
     if (item.promotion) {
-      newPrice = newPrice - newPrice * 0.5;
+      updatedPrice = updatedPrice - updatedPrice * 0.5;
     }
     // when time is between 7 to 10 P.M, 10% discount applies
     if (currentTime >= 19 && currentTime < 22) {
-      newPrice = newPrice - newPrice * 0.1;
+      updatedPrice = updatedPrice - updatedPrice * 0.1;
     }
     // No discount
-    return { ...item, price: newPrice };
+    return { ...item, price: updatedPrice };
   });
 
-  return newPriceProductsList;
+  return updatedPriceProductsList;
 }
 
 dynamicPricingSystem(productsList);
