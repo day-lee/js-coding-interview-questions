@@ -41,6 +41,7 @@ function spinalCase(str) {
   const spaceOrUnderscore = /\s|_/g;
 
   // if lowerUpper pattern, add -
+  // modify strings: replace() method and capturing group with variables in order
   const lowerUpperPattern = /([a-z])([A-Z])/g;
   let result = str.replace(lowerUpperPattern, "$1 $2");
 
