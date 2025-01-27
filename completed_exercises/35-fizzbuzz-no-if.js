@@ -19,18 +19,34 @@ Examples
 15 should return FizzBuzz
 17 should return 17
 */
+
+// option 1. ternary with variable
 const fizzBuzz = (n) => {
   let result = n;
   result = n % 3 === 0 ? "Fizz" : result;
   result = n % 5 === 0 ? "Buzz" : result;
   result = n % 3 === 0 && n % 5 === 0 ? "FizzBuzz" : result;
 
-  console.log(result);
   return result;
 };
 
-fizzBuzz(1); // 1
-fizzBuzz(6); // Fizz
-fizzBuzz(7); // 7
-fizzBuzz(10); // Buzz
-fizzBuzz(30); // FizzBuzz
+// option 2. logical operator
+function fizzBuzz(n) {
+  return (
+    (n % 15 === 0 && "FizzBuzz") ||
+    (n % 3 === 0 && "Fizz") ||
+    (n % 5 === 0 && "Buzz") ||
+    n
+  );
+}
+
+// option 3. ternary
+function fizzBuzz(n) {
+  return n % 15 ? (n % 5 ? (n % 3 ? n : "Fizz") : "Buzz") : "FizzBuzz";
+}
+
+console.log(fizzBuzz(1)); // 1
+console.log(fizzBuzz(6)); // Fizz
+console.log(fizzBuzz(7)); // 7
+console.log(fizzBuzz(10)); // Buzz
+console.log(fizzBuzz(30)); // FizzBuzz
