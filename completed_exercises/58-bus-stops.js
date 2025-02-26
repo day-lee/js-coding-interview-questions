@@ -14,7 +14,7 @@ const passengerNumbers = function (busStops) {
   return currentNum;
 };
 
-// option 2
+// option 2 - const number = (busStops) => busStops.reduce((rem, [on, off]) => rem + on - off, 0);
 const passengerNumbers = (busStops) => {
   console.log(
     busStops.reduce((result, [on, off]) => {
