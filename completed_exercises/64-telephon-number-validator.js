@@ -44,3 +44,28 @@ const phoneNumberRegex = new RegExp(
 // console.log(phoneNumberRegex.test("12 555-555-5555")); //F
 // console.log(phoneNumberRegex.test("(555 555 5555")); // F
 // console.log(phoneNumberRegex.test("1(555 555 5555")); // F
+
+function telephoneCheck(str) {
+  const countryCodeRegex = /(1[-\s]?)?/; 
+  const areaCodeRegex = /(\(\d{3}\)[-\s]?|\d{3}[-\s]?)/;
+  const numbersRegex = /\d{3}[-\s]?\d{4}/;
+  const phoneNumberRegex = new RegExp(
+`^${countryCodeRegex.source}${areaCodeRegex.source}${numbersRegex.source}$`
+);
+
+if (/[a-z+_]/i.test(str)) return false
+
+return phoneNumberRegex.test(str)
+}
+
+console.log(telephoneCheck("1-555-555-5555")); //T
+console.log(telephoneCheck("(555)555-5555")); //T
+console.log(telephoneCheck("555 555-5555")); //T
+console.log(telephoneCheck("1 555-555-5555")); //T
+console.log(telephoneCheck("1(555)-555-5555")); //T
+console.log(telephoneCheck("12 555-555-5555")); //F
+console.log(telephoneCheck("(555 555 5555")); // F
+console.log(telephoneCheck("1(555 555 5555")); // F
+console.log(telephoneCheck("A1(555 555 5555")); // F
+console.log(telephoneCheck("+1(555 555 5555")); // F
+console.log(telephoneCheck("1555_555 5555")); // F
