@@ -15,7 +15,7 @@ function isEqual(value, other) {
   //  NaN comparison: check each value
   if (Number.isNaN(value) && Number.isNaN(other)) return true;
 
-  // null comparison: typeof null returns `object`, prevent null value for object comparison.
+  // null comparison: typeof null returns `object`, prevent null value from object comparison.
   if (value === null || other === null) return value === other;
 
   // array comparison

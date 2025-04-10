@@ -1,7 +1,7 @@
 const contains = require("./61-contains.js");
 
-test.todo("contains on empty object returns false");
 describe("contains test", () => {
+ // test.todo("contains on empty object returns false");
   test("empty object, return false", () => {
     const obj = {};
     const result = false;
@@ -22,6 +22,6 @@ describe("contains test", () => {
 
   test("should throw an error when invalid parameter like an array was passed as an argument", () => {
     const obj = [1, 2, 3];
-    expect(() => contains(obj, "a")).toThrow('Error');
+    expect(() => contains(obj, "a")).toThrow("Error");
   });
 });

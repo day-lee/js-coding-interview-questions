@@ -32,8 +32,7 @@ let candidates = [{
 }]
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////
 function equityMatch(candidate, job){
   return !candidate.desiresEquity || job.equityMax > 0
 }
@@ -48,6 +47,41 @@ function match(job, candidates) {
   return candidates.filter((candidate) =>(
     equityMatch(candidate,job) && locationMatch(candidate, job)
   ))
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Logical operator
+
+&& only TT -> T otherwise, F
+|| only FF -> F otherwise, T
+
+truthy, falsy
+&& left trun return right
+
+*/
+function match(job, candidates) {
+
+ function equityMatch(job, candidate) {
+   return job.equityMax > 0 || !candidate.desiresEquity
+ }
+
+  // comparison between arrays and check inclusion. -> some() + includes()
+ function locMatch(job, candidate) {
+  const desiredLoc = job.locations.some(loc => candidate.desiredLocations.includes(loc))
+   return job.locations.includes(candidate.currentLocation) || desiredLoc
+ }
+
+  let result = []
+
+  for(let candidate of candidates) {
+    if (equityMatch(job, candidate) && locMatch(job, candidate)) {
+        result.push(candidate)
+        }
+  }
+
+  return result
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
