@@ -8,13 +8,22 @@ PS: here's the link to the GitHub API: https://docs.github.com/en/rest/users. It
 https://www.100jsfunctions.com/exercises/fetchGitHubName
 */
 // fetch returns a promise
-const fetchGitHubUserName = async (username) => {
-    const fullName = await fetch(`https://api.github.com/users/${username}`)
-                     .then(res => res.json())   
-                     .then(result => result.name ); 
-    return fullName ? fullName : null
+async function fetchGitHubUserName(username){
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}`)        
+        if(response.ok) {
+            const user = await response.json();
+        return user.name;
+    }                 
+    return null;
+    }
+    catch(error) {
+        console.error('Error fetching github username: ', error)
+        return null;
+    }
+    
 }
 
-console.log(fetchGitHubUserName('day-lee').then((value)=> console.log(value)))
-console.log(fetchGitHubUserName('day-leelefjieal').then((value)=> console.log(value)))
+fetchGitHubUserName('day-lee').then(name => console.log(name)) 
+fetchGitHubUserName('day-leelefjieal').then(name => console.log(name)) // null
 
