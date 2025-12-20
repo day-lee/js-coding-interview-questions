@@ -25,6 +25,7 @@ Scan from index 0:
 index 0 has 1 (correct), index 1 has -1 (not 2) ⇒ missing positive is 2
 
 */
+// 교환 정렬 
 function exchangeSort(arr){
     const result = [...arr];
     for (let i = 0; i < result.length; i++){
