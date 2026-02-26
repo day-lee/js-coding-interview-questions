@@ -95,4 +95,3 @@ similar but i will use apply as it gets on array as a second parameter
 // context, universe is book.characters 
 //첫번째 인자로 전달된 객체를 바인딩 
 book.characters.list.call({mainChars:["Draco", "Severus", "Voldemort"]})
-
