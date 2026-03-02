@@ -23,7 +23,8 @@ function stringExpansion(s) {
     // for loop of array to check 
     for (let i of s) {
     // if Number.isNaN(el), add to result 
-        if (Number.isNaN(Number(i))) {
+        if (isNaN(Number(i))) {
+            //result += i.repeat(num)
             for (let j = 1; j <= num; j++) {
                 result += i;
             }
@@ -44,3 +45,27 @@ console.log(stringExpansion('3abc')) //"aaabbbccc"
 console.log(stringExpansion('abcde')) // "abcde"
 console.log(stringExpansion('a2bcde')) // "abbccddee"
 console.log(stringExpansion('0d0a0v0t0y')) //  ''
+console.log("----------------------------")
+
+
+function stringExpansion2(str) {
+  let num = 1;
+
+    return str.split('').map(item => {
+        if (!isNaN(item)) {
+            // number 
+            num = Number(item)
+            return ''
+        } else {
+            //string 
+           return item.repeat(num)
+        }
+    }).join('')
+
+}
+
+console.log(stringExpansion2('3D2a5d2f')); // 'DDDaadddddff'
+console.log(stringExpansion2('3abc')) //"aaabbbccc" 
+console.log(stringExpansion2('abcde')) // "abcde"
+console.log(stringExpansion2('a2bcde')) // "abbccddee"
+console.log(stringExpansion2('0d0a0v0t0y')) //  ''
