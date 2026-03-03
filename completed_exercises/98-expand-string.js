@@ -69,3 +69,33 @@ console.log(stringExpansion2('3abc')) //"aaabbbccc"
 console.log(stringExpansion2('abcde')) // "abcde"
 console.log(stringExpansion2('a2bcde')) // "abbccddee"
 console.log(stringExpansion2('0d0a0v0t0y')) //  ''
+console.log("----------------------------")
+
+
+// map과 return 사용할 수 있음. 중괄호랑 명시적으로 사용해야함 
+function stringExpansion3(str) { 
+    // variable to store number 
+    let num = 1;
+    // turn str into arr and use map to iterate each element 
+    return str.split('').map(item => {
+    // if el is string isNaN(el) -> string, repeat
+    // return  repeated str
+    let newValue = Number(item)
+    if (isNaN(newValue)) {
+        return item.repeat(num)
+    }
+    // else is number, store it in variable
+    // return empty string '' else {
+      else {  
+        num = newValue
+        return ''
+    }
+    //join the array into string 
+    }).join('')
+}
+
+console.log(stringExpansion3('3D2a5d2f')); // 'DDDaadddddff'
+console.log(stringExpansion3('3abc')) //"aaabbbccc" 
+console.log(stringExpansion3('abcde')) // "abcde"
+console.log(stringExpansion3('a2bcde')) // "abbccddee"
+console.log(stringExpansion3('0d0a0v0t0y')) //  ''
