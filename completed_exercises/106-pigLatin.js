@@ -58,11 +58,38 @@ function pigLatinSingle(string) {
     }
 }
 // write the test cases first 
-console.log(pigLatinSingle('apple')) // appleway
-console.log(pigLatinSingle('bee')) // eebay
-console.log(pigLatinSingle('brandY')) // andybray
-console.log(pigLatinSingle('brandy2!')) // null
-console.log(pigLatinSingle('cbv')) // cbvay 
+// console.log(pigLatinSingle('apple')) // appleway
+// console.log(pigLatinSingle('bee')) // eebay
+// console.log(pigLatinSingle('brandY')) // andybray
+// console.log(pigLatinSingle('brandy2!')) // null
+// console.log(pigLatinSingle('cbv')) // cbvay 
 
+// regex.search() 를 사용해서 풀기
+function piglatinSearch(string) {
+//lowercase
+const lower = string.toLowerCase()
+// non-alphabet, null
+const regexAlphabet = /^[a-z]+$/
+if (!regexAlphabet.test(lower)) return null
+// if no vowels at all then 
+const regexVowels = /[aeiou]/ // squre bracket 을 써야 이 중에 하나라는 말임. /aeiou/는 aeiou가 연달아 나오는 경우를 찾는 것.
+const indexFirstVowel = lower.search(regexVowels)
+// no vowels at all
+if (indexFirstVowel === -1) return lower + 'ay' 
+// if first index included in vowels then..
+if (indexFirstVowel === 0) return lower + 'way'
+// if starts with consonant, find first occurrence of vowel then ...
+return lower.slice(indexFirstVowel) + lower.slice(0, indexFirstVowel)  + 'ay'
+}
+// nonalpha
+console.log(piglatinSearch('banana2')) // null
+// no vowels
+console.log(piglatinSearch('bbbc')) // bbbcay
+// starts with vowel 
+console.log(piglatinSearch('abalone')) // abaloneway
+// starts with consonant
+console.log(piglatinSearch('banana')) // ananabay
+// lowercase
+console.log(piglatinSearch('Aba')) // abaway
 
 
